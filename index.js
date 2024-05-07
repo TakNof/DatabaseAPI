@@ -33,6 +33,10 @@ const ScoreInsert = mongoose.model('Score',
     "Scores"
 );
 
+
+app.get("/", (req, res) =>{
+    res.send("Welcome the DOOM API.");
+});
 app.post('/score', async (req, res) => {
     const Score = new ScoreInsert({ name: req.body.name, score: req.body.score });
     try {
