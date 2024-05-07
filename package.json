@@ -1,0 +1,26 @@
+{
+  "name": "doom-api",
+  "version": "1.0.0",
+  "description": "DOOM API by Alejandro Fonseca Téllez and Maria Paula Chavarrio",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "node",
+    "js"
+  ],
+  "author": "Alejandro Fonseca Téllez and Maria Paula Chavarrio",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.19.2",
+    "mongodb": "^6.6.1",
+    "mongoose": "^8.3.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
