@@ -1,6 +1,6 @@
 GET http://localhost:3000 HTTP/1.1
 ###
-GET http://localhost:3000/users HTTP/1.1
+GET http://localhost:3000/scores/Im_too_young_to_die HTTP/1.1
 ###
 GET http://localhost:3000/enterprises HTTP/1.1
 ###
@@ -15,7 +15,8 @@ Content-Type: application/json
 
 {
     "name": "MauroGaymer5457",
-    "score": 10
+    "score": 1,
+    "difficulty": "I'm too young to die"
 }
 
 ###

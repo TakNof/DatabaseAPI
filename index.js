@@ -28,17 +28,24 @@ db.once('open', function() {
 const ScoreInsert = mongoose.model('Score',
     new mongoose.Schema({
         name: {type: String, required: true},
-        score: { type: Number, required: true }
+        score: { type: Number, required: true },
+        difficulty: {type: String, required: true}
     },{ versionKey: false }),
     "Scores"
 );
 
-
+//Base Endpoint
 app.get("/", (req, res) =>{
     res.send("Welcome the DOOM API.");
 });
+
+//Post Endpoint
 app.post('/score', async (req, res) => {
-    const Score = new ScoreInsert({ name: req.body.name, score: req.body.score });
+    const Score = new ScoreInsert({
+        name: req.body.name,
+        score: req.body.score,
+        difficulty: req.body.difficulty
+    });
     try {
         const savedScore = await Score.save();
         res.send(savedScore);
@@ -47,11 +54,19 @@ app.post('/score', async (req, res) => {
     }
 });
 
-app.get('/scores', (req, res) => {
-    ScoreInsert.find((err, scores) => {
-        if (err) return console.error(err);
-        res.send(scores);
+const difficulties = ["Im_too_young_to_die", "Hurt_me_Plenty", "Ultra-Violence", "Nightmare"];
+
+for (let difficulty of difficulties) {
+    app.get(`/scores/${difficulty}`, async (req, res) => {
+        let scores = [];
+        try{
+            let difficultyName = difficulty.replace(/_/g, ' ').replace(/Im/g, "I");
+            scores = [...await ScoreInsert.find({difficulty: difficultyName}).sort({score: -1}).limit(10), ...scores];
+            res.send(scores);
+        }catch (err){
+            console.error(err);
+        }
     });
-});
+}
 
 app.listen(3000, () => console.log('Server listening on port 3000'));
