@@ -60,7 +60,7 @@ for (let difficulty of difficulties) {
     app.get(`/scores/${difficulty}`, async (req, res) => {
         let scores = [];
         try{
-            let difficultyName = difficulty.replace(/_/g, ' ').replace(/Im/g, "I");
+            let difficultyName = difficulty.replace(/_/g, ' ').replace(/Im/g, "I'm");
             scores = [...await ScoreInsert.find({difficulty: difficultyName}).sort({score: -1}).limit(10), ...scores];
             res.send(scores);
         }catch (err){
